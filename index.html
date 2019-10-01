@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Schedule</title>
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script> -->
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Train Schedule</h1>
+            <p>A Complrehensive Directory of Employee Billable Hours</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header container">Current Employees</div>
+        <div class="card-body">
+            <table class="table table-sm table-hover" id='train-table'>
+                <thead>
+                    <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Desination</th>
+                        <th scope="col">First Train Time</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Next train</th>
+                        <th scope="col">Minutes</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <form>
+        <div class="form-group">
+            <label for="train-name">Train Name</label>
+            <input class="form-control" id="train-name" placeholder="Add Train" type="text">
+        </div>
+        <div class="form-group">
+            <label for="destination">Desination</label>
+            <input class="form-control" id="destination" placeholder="Where is this train going" type="text">
+        </div>
+        <div class="form-group">
+            <label for="first-train">First train time</label>
+            <input class="form-control" id="first-train" placeholder="Time" type="text">
+        </div>
+        <div class="form-group">
+            <label for="frequency">Frequency</label>
+            <input class="form-control" id="frequency" placeholder="minutes" type="text">
+        </div>
+        <button type="button" class="btn btn-primary float-right" id="add-train-btn">Submit</button>
+    </form>
+</body>
+<script src="assets/javascript/app.js"></script>
+
+</html>
