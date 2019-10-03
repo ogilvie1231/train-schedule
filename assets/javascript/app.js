@@ -18,8 +18,9 @@ $('#add-train-btn').on('click', function(event) {
     // retrieving input values
     var trainName = $("#train-name").val().trim();
     var destination = $("#destination").val().trim();
-    var firstTrain = moment($("#first-train").val().trim(), "HH:mm:ss A").subtract(1, "years").format("HH:mm");
+    var firstTrain = moment($("#first-train").val().trim(), "hh:mm:ss a").subtract(1, "years").format("hh:mm a");
     var frequency = $("#frequency").val().trim();
+    console.log('first train button value: ', firstTrain);
 
     // creating an object for new train
     var newTrain = {
@@ -43,7 +44,7 @@ database.ref().on("child_added", function(childSnapshot) {
     // setting names of snapshot values for simplicity
     var trainName = childSnapshot.val().name;
     var destination = childSnapshot.val().destination;
-    var firstTrain = moment(childSnapshot.val().start, 'HH:mm');
+    var firstTrain = moment(childSnapshot.val().start, 'hh:mm a');
     var frequency = childSnapshot.val().frequency;
 
     var timeRemainder = moment().diff(moment.unix(firstTrain), "minutes") % frequency;
@@ -52,16 +53,15 @@ database.ref().on("child_added", function(childSnapshot) {
     console.log('timeRemainder: ', timeRemainder);
     console.log('minAway: ', minAway);
     console.log('nextArrival: ', nextArrival);
-
-
-
+    console.log('firstTrain: ', firstTrain);
+    console.log('frequency: ', frequency);
 
 
     // Create the new row
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
-        $("<td>").text(firstTrain),
+        $("<td>").text(firstTrain.format('hh:mm a')),
         $("<td>").text(frequency),
         $("<td>").text(nextArrival),
         $("<td>").text(minAway),
@@ -71,8 +71,3 @@ database.ref().on("child_added", function(childSnapshot) {
     // Append the new row to the table
     $("#train-table > tbody").append(newRow);
 });
-
-function calculateArrival() {
-    var now = moment();
-    var minutesAway = moment(nextTrain, 'HH:mm').diff(now, 'minutes')
-};
