@@ -18,7 +18,7 @@ $('#add-train-btn').on('click', function(event) {
     // retrieving input values
     var trainName = $("#train-name").val().trim();
     var destination = $("#destination").val().trim();
-    var firstTrain = moment($("#first-train").val().trim(), "hh:mm:ss a").subtract(1, "years").format("hh:mm a");
+    var firstTrain = $("#first-train").val().trim();
     var frequency = $("#frequency").val().trim();
     console.log('first train button value: ', firstTrain);
 
@@ -44,12 +44,23 @@ database.ref().on("child_added", function(childSnapshot) {
     // setting names of snapshot values for simplicity
     var trainName = childSnapshot.val().name;
     var destination = childSnapshot.val().destination;
-    var firstTrain = moment(childSnapshot.val().start, 'hh:mm a');
+    console.log('child start', childSnapshot.val().start)
+    var firstTrain = childSnapshot.val().start;
     var frequency = childSnapshot.val().frequency;
 
-    var timeRemainder = moment().diff(moment.unix(firstTrain), "minutes") % frequency;
+
+    var timeArr = firstTrain.split(":");
+    var trainTime = moment()
+        .hours(timeArr[0])
+        .minutes(timeArr[1]);
+    // var maxMoment = moment.max(moment(), trainTime);
+    var timeDiff = moment().diff(trainTime, "minutes")
+    var timeRemainder = timeDiff % frequency;
+    // var timeRemainder = timeFromFirstTrain % frequency;
     var minAway = frequency - timeRemainder;
-    var nextArrival = moment().add(minAway, "m").format("hh:mm A");
+    var nextArrival = moment().add(minAway, "minutes").format("hh:mm A");
+    // console.log('timeFromFirstTrain: ', timeFromFirstTrain);
+    console.log("timeDiff" + timeDiff);
     console.log('timeRemainder: ', timeRemainder);
     console.log('minAway: ', minAway);
     console.log('nextArrival: ', nextArrival);
@@ -61,7 +72,7 @@ database.ref().on("child_added", function(childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
-        $("<td>").text(firstTrain.format('hh:mm a')),
+        $("<td>").text(firstTrain),
         $("<td>").text(frequency),
         $("<td>").text(nextArrival),
         $("<td>").text(minAway),

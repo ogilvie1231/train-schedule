@@ -9,3 +9,10 @@ form {
     max-width: 85%;
     margin: auto;
 }
+
+#trainHead {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bolder;
+    padding: 2%;
+}

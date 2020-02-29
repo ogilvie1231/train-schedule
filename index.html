@@ -12,8 +12,6 @@
 
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
@@ -22,15 +20,16 @@
 
 <body>
 
-    <div class="container">
+    <div class="">
         <div class="jumbotron">
             <h1>Train Schedule</h1>
-            <p>A Complrehensive Directory of Employee Billable Hours</p>
+            <p>Below is a list of trains, their frequency, next arrival times and how long until the next train arrives.</p>
+            <p>Feel free to enter a new train and see how long until the next one will arrive.</p>
         </div>
     </div>
 
-    <div class="card mb-4">
-        <div class="card-header container">Current Employees</div>
+    <div class="card mb-4 container">
+        <div id="trainHead">Train Information</div>
         <div class="card-body">
             <table class="table table-sm table-hover" id='train-table'>
                 <thead>
